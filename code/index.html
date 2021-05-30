@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div id="loader" class="center"></div>
+
+    <section class="top-section">
+        <div class="container">
+            <div class="row pt">
+
+                <div class="columns two" style="visibility: hidden;">1</div>
+                <div class="columns nine">
+                    <div class="filters">
+
+                        <div class="tab">
+                            <button class="tablinks active" onclick="openTab(event)">
+                                <h6>buy</h6>
+                            </button>
+                            <button class="tablinks" onclick="openTab(event)">
+                                <h6>rent</h6>
+                            </button>
+                            <button class="tablinks" onclick="openTab(event)">
+                                <h6>resale</h6>
+                            </button>
+                        </div>
+
+                        <!-- Tab content -->
+                        <!-- buy -->
+                        <div id="buy" class="tabcontent">
+                            <div class="form-cont">
+                                <form action="" method="GET">
+                                    <div class="row">
+                                        <div class="columns four">
+                                            <select name="city" id="city">
+                                                <option selected>Islamabad</option>
+                                                <option value="islamabad">Islamabad</option>
+                                                <option value="peshawar">Peshawar</option>
+                                                <option value="lahore">Lahore</option>
+                                            </select>
+                                        </div>
+                                        <div class="columns four">
+                                            <select name="area" id="area">
+                                                <option selected>Bahria phase 8</option>
+                                                <option value="islamabad">cantt</option>
+                                                <option value="peshawar">G-10</option>
+                                            </select>
+                                        </div>
+                                        <div class="columns four">
+                                            <select name="type" id="type">
+                                                <option selected>Resedential</option>
+                                                <option value="islamabad">Villa</option>
+                                                <option value="peshawar">Flat</option>
+                                                <option value="lahore">APartmnwt</option>
+                                            </select>
+                                            <button type="Submit" name="submit"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row options">
+                                        <div class="columns">
+                                            <div class="price-range-tab" id="price-range"
+                                                onclick="toggle_tabs('price-range', 'price-filter-tab','size-filter-tab','size-range')">
+                                                Price Range<i class="fas fa-chevron-down"></i>
+                                            </div>
+                                            <div class="price-range-tab" id="size-range"
+                                                onclick="toggle_tabs('size-range', 'size-filter-tab','price-filter-tab','price-range')">
+                                                Size Range<i class="fas fa-chevron-down"></i>
+                                            </div>
+                                            <!-- <div class="price-range-tab">Beds<i class="fas fa-chevron-down"></i></div> -->
+                                            <select name="beds" id="beds" class="price-range-tab">
+                                                <option selected>Beds</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row drop-down">
+
+                                        <!-- price range -->
+                                        <div class="columns seven" id="price-filter-tab">
+                                            <div class="max-min-head">
+                                                <div class="min-head">
+                                                    <label>Min</label>
+                                                    <span class="range_min light left">1</span>
+                                                </div>
+                                                <div class="max-head">
+                                                    <label>Max</label>
+                                                    <span class="range_max light right">50000</span>
+                                                </div>
+                                            </div>
+                                            <div class="rangeslider">
+                                                <input class="min" name="range_1" type="range" min="1" max="50000"
+                                                    value="1" />
+                                                <input class="max" name="range_1" type="range" min="1" max="50000"
+                                                    value="50000" />
+                                            </div>
+                                            <div class="btn-cont">
+                                                <button type="button"
+                                                    onclick="btn_toggle_tab('price-range', 'price-filter-tab')">Done</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- size range -->
+                                        <div class="columns seven" id="size-filter-tab">
+                                            <div class="units">
+                                                <div>
+                                                    Area Unit :
+                                                    <span>
+                                                        <select onchange="changeUnitValues()" name="areaUnit"
+                                                            id="areaUnit">
+                                                            <option value="marla">Marla</option>
+                                                            <option value="kanal">Kanal</option>
+                                                            <option value="sqft">Square Feet</option>
+                                                            <option value="sqyd">Square Yards</option>
+                                                            <option value="sqm">Square Meters</option>
+                                                            <option value="acre">Acre</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="max-min-head">
+                                                <div class="min-head">
+                                                    <label>Min</label>
+                                                    <span class="size_range_min light left">1</span>
+                                                </div>
+                                                <div class="max-head">
+                                                    <label>Max</label>
+                                                    <span class="size_range_max light right">50</span>
+                                                </div>
+                                            </div>
+                                            <div class="rangeslider">
+                                                <input class="size_min" name="size_range_1" type="range" min="1"
+                                                    max="50" value="1" />
+                                                <input class="size_max" name="size_range_1" type="range" min="1"
+                                                    max="50" value="50" />
+                                            </div>
+                                            <div class="btn-cont">
+                                                <button type="button"
+                                                    onclick="btn_toggle_tab('size-range', 'size-filter-tab')">Done</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- beds -->
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <!--./buy -->
+
+                        <!-- rent -->
+                        <div id="rent" class="tabcontent">
+
+                        </div>
+                        <!-- ./rent -->
+
+                        <div id="resale" class="tabcontent">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cities-section">
+        <div class="container">
+            <div class="row">
+                <div class="columns">
+                    <div class="cities">
+                        <div class="s-city">
+                            <div class="img"><img src="img/top.png" alt=""></div>
+                            <div class="text">Mumtaz</div>
+                        </div>
+                        <div class="s-city">
+                            <div class="img"><img src="img/top2.png" alt=""></div>
+                            <div class="text">G-11</div>
+                        </div>
+                        <div class="s-city">
+                            <div class="img"><img src="img/top3.png" alt=""></div>
+                            <div class="text">Gulberg</div>
+                        </div>
+                        <div class="s-city">
+                            <div class="img"><img src="img/top.png" alt=""></div>
+                            <div class="text">Lahore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <div class="container">
+            <h1>FEATURED PROJECTS</h1>
+            <div class="row">
+                <div class="columns">
+
+                    <div class="grid-container">
+                        <main class="grid-item main">
+                            <div class="project-items">
+
+                                <div class="item item1">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="item item2">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                </div>
+                                <div class="item item3">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+                                </div>
+                                <div class="item item4">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                </div>
+                                <div class="item item5">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+                                </div>
+                                <div class="item item6">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                </div>
+                                <div class="item item7">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+                                </div>
+                                <div class="item item8">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">Lorem ipsum</div>
+                                        <p class="text">
+                                            Lorem ipsum dolor Lorem.
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow-thumbs">
+                                <button class="arrow left proj-arrow">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="arrow right proj-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </main>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="properties-section">
+        <div class="container">
+            <h1>OWN THESE PROPERTIES</h1>
+            <div class="row">
+                <div class="columns">
+
+                    <div class="grid-container">
+                        <main class="grid-item main">
+                            <div class="properties-items">
+
+                                <div class="item item1">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">fresh</span>
+                                    </div>
+                                </div>
+
+                                <div class="item item2">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">fresh</span>
+                                    </div>
+                                </div>
+
+                                <div class="item item3">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                </div>
+
+                                <div class="item item4">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">fresh</span>
+                                    </div>
+                                </div>
+
+                                <div class="item item5">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                </div>
+
+                                <div class="item item6">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">fresh</span>
+                                    </div>
+                                </div>
+
+                                <div class="item item7">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+                                </div>
+
+                                <div class="item item8">
+                                    <div class="head">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="body">
+                                        <div class="title">1 Kanal House For Sale</div>
+                                        <p class="text">
+                                            Bahria Town Phase 4, Islamabad
+                                        </p>
+                                        <p class="info">
+                                            5 beds, 5 baths
+                                        </p>
+                                        <h5><small>PKR</small> 450,000</h5>
+                                    </div>
+
+                                    <!--  -->
+                                    <div class="ribbon">
+                                        <span class="text">Urgent Sale</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow-thumbs">
+                                <button class="arrow left properties-arrow">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="arrow right properties-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </main>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us-section">
+        <div class="container">
+            <h1>WHY US?</h1>
+            <div class="row">
+                <div class="columns">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus velit recusandae assumenda,
+                        quos
+                        iure dignissimos labore soluta suscipit natus maxime, repellat nobis maiores illum sapiente
+                        quibusdam nesciunt illo earum accusamus.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns">
+
+                    <div class="grid-container">
+                        <main class="grid-item main">
+                            <div class="why-us-items">
+
+                                <div class="item item1">
+                                    <div class="img">
+                                        <img src="img/top2.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>Save money</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item item2">
+                                    <div class="img">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>cheap prices</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item item3">
+                                    <div class="img">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>easy installments</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item item4">
+                                    <div class="img">
+                                        <img src="img/top2.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>quick service</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item item5">
+                                    <div class="img">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>best locations</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item item6">
+                                    <div class="img">
+                                        <img src="img/top.png" alt="">
+                                    </div>
+                                    <div class="descp">
+                                        <h3>customer</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non quasi
+                                            quidem iusto illo. Rem quam unde iste optio sequi aliquid nemo recusandae
+                                            eveniet vel, expedita rerum ipsam fuga hic.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow-thumbs">
+                                <button class="arrow left why-us-arrow" onclick="plusSlides(1)">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="arrow right why-us-arrow" onclick="plusSlides(-1)">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </main>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h1>MEET THE TEAM</h1>
+            <div class="row">
+                <div class="columns">
+
+                    <div class="grid-container">
+                        <main class="grid-item main">
+                            <div class="team-items">
+
+                                <div class="item item1">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item2">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item3">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item4">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item5">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item6">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item7">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+                                <div class="item item8">
+                                    <div class="head">
+                                        <img src="img/top3.png" alt="">
+                                    </div>
+                                    <h3>Lorm ipsum</h3>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow-thumbs">
+                                <button class="arrow left team-arrow">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="arrow right team-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </main>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-section">
+        <div class="container">
+            <h1>NEWS AND BLOG</h1>
+            <div class="row">
+                <div class="columns three" style="visibility: hidden;">1</div>
+                <div class="columns six blog-card">
+                    <div class="row blog-img">
+                        <div class="columns">
+                            <img src="img/top.png" alt="">
+                        </div>
+                    </div>
+                    <div class="footer">
+
+                        <div class="row blog-title">
+                            <div class="columns">
+                                <h3>Lorm ipsum</h3>
+                            </div>
+                        </div>
+                        <div class="row blog-body">
+                            <div class="columns">
+                                Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. Lorem Ipsum has been the
+                                industry’s standard dummy text ever since the 1500s…</div>
+                        </div>
+                        <div class="row blog-link">
+                            <div class="columns">
+                                <a href="javascript:void(0)">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns three" style="visibility: hidden;">1</div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="partner-section">
+        <div class="container">
+            <h1>PARTNERS</h1>
+            <div class="row">
+                <div class="columns">
+
+                    <div class="grid-container">
+                        <main class="grid-item main">
+                            <div class="partner-items">
+
+                                <div class="item item1">
+                                    <img src="img/top.png" alt="">
+                                </div>
+                                <div class="item item2"></div>
+                                <div class="item item3">
+                                    <img src="img/top2.png" alt="">
+                                </div>
+                                <div class="item item4"></div>
+                                <div class="item item5">
+                                    <img src="img/top3.png" alt="">
+                                </div>
+                                <div class="item item6"></div>
+                                <div class="item item7"></div>
+                                <div class="item item8">
+                                    <img src="img/top.png" alt="">
+                                </div>
+
+                            </div>
+
+                            <div class="arrow-thumbs">
+                                <button class="arrow left partner-arrow">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="arrow right partner-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                        </main>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="columns three">
+                    <h4>About</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam beatae quas expedita adipisci,
+                        consectetur obcaecati iste porro recusandae eos illum officiis explicabo suscipit eveniet magnam
+                        inventore! Sint quaerat libero saepe!</p>
+                </div>
+                <div class="columns three">
+                    <h4>CONTACT</h4>
+                    <p>
+                        <span>
+                            <i class="fas fa-map-marker-alt"></i>80 Franklin Street New York, NY 10013 USA
+                        </span>
+                        <span>
+                            <i class="fas fa-clock"></i>08 - 17 mon-fr
+                        </span>
+                        <span>
+                            <i class="fas fa-phone"></i>+1 202 555 0135
+                        </span>
+                        <span>
+                            <i class="fas fa-phone"></i>+1 202 555 0145
+                        </span>
+                        <span>
+                            <i class="fas fa-envelope"></i>contact@realtyspace.com
+                        </span>
+                    </p>
+                </div>
+                <div class="columns three">
+                    <h4>FEEDBACK</h4>
+                    <div class="form">
+                        <form method="POST">
+                            <input type="email" name="email" id="email" placeholder="E-mail">
+                            <textarea name="message" id="message" cols="30" rows="10"
+                                placeholder="Message for us"></textarea>
+                            <button type="submit" name="submit" id="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="columns three">
+                    <h4>SOCIAL</h4>
+                    <div class="icon">
+
+                        <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row cp">
+                <p>© 2000 – 2021 Media Pvt. Ltd. </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
